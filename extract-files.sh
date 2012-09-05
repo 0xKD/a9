@@ -15,10 +15,8 @@
 # limitations under the License.
 
 DEVICE=a9
-COMMON=c1-common
 MANUFACTURER=karbon
 
-mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
 mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio
 mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/cameradata
@@ -29,16 +27,22 @@ mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars
 mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/wifi
 mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging
 
-# a9
+# a9 - Unedited
 adb pull /system/lib/libActionShot.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libActionShot.so
 adb pull /system/lib/libakm.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libakm.so
 adb pull /system/lib/libarccamera.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libarccamera.so
+
+# Camera - Done
 adb pull /system/lib/libcamera_client.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libcamera_client.so
 adb pull /system/lib/libcameraservice.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libcameraservice.so
 adb pull /system/lib/libcamera.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libcamera.so
-adb pull /system/lib/libcaps.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libcaps.so
+
+#adb pull /system/lib/libcaps.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libcaps.so
+
+# EGL - Done
 adb pull /system/lib/libEGL.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libEGL.so
 adb pull /system/lib/libexif.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libexif.so
+
 adb pull /system/lib/libfimc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libfimc.so
 adb pull /system/lib/libfimg.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libfimg.so
 adb pull /system/lib/libGLESv1_CM.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libGLESv1_CM.so
@@ -68,32 +72,49 @@ adb pull /system/lib/libtvout.so ../../../vendor/$MANUFACTURER/$DEVICE/proprieta
 adb pull /system/bin/BCM4330B1_002.001.003.0221.0265.hcd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/BCM4330B1_002.001.003.0221.0265.hcd
 adb pull /system/bin/rild ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/rild
 adb pull /system/bin/tvoutserver ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/tvoutserver
-adb pull /system/cameradata/datapattern_420sp.yuv ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/cameradata/datapattern_420sp.yuv
-adb pull /system/cameradata/datapattern_front_420sp.yuv ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/cameradata/datapattern_front_420sp.yuv
-adb pull /system/lib/egl/libEGL_mali.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl/libEGL_mali.so
+#adb pull /system/cameradata/datapattern_420sp.yuv ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/cameradata/datapattern_420sp.yuv
+#adb pull /system/cameradata/datapattern_front_420sp.yuv ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/cameradata/datapattern_front_420sp.yuv
+
+# /lib/egl - Edited
+adb pull /system/lib/egl/libEGL_adreno200.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl/libEGL_adreno200.so
 adb pull /system/lib/egl/libGLES_android.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl/libGLES_android.so
-adb pull /system/lib/egl/libGLESv1_CM_mali.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl/libGLESv1_CM_mali.so
-adb pull /system/lib/egl/libGLESv2_mali.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl/libGLESv2_mali.so
+adb pull /system/lib/egl/libGLESv1_CM_adreno200.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl/libGLESv1_CM_adreno200.so
+adb pull /system/lib/egl/libGLESv2_adreno200.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl/libGLESv2_adreno200.so
+# _ Consider adding libq3dtools_adreno200.so ^ Same directory
+
+# /etc/firmware - Decide...
 adb pull /system/etc/firmware/qt602240.fw ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/qt602240.fw
 adb pull /system/etc/firmware/RS_M5LS_OB.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/RS_M5LS_OB.bin
 adb pull /system/etc/firmware/RS_M5LS_OC.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/RS_M5LS_OC.bin
 adb pull /system/etc/firmware/RS_M5LS_OE.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/RS_M5LS_OE.bin
 adb pull /system/etc/firmware/RS_M5LS_TB.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/RS_M5LS_TB.bin
-adb pull /system/vendor/firmware/mfc_fw.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/mfc_fw.bin
+
+
+# No vendor directory ## adb pull /system/vendor/firmware/mfc_fw.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/mfc_fw.bin
 adb pull /system/lib/hw/acoustics.default.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/acoustics.default.so
 adb pull /system/lib/hw/alsa.default.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/alsa.default.so
-adb pull /system/lib/hw/copybit.smdkv310.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/copybit.GT-I9100.so
-adb pull /system/lib/hw/vendor-gps.smdkv310.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/gps.GT-I9100.so
+
+# Edited
+adb pull /system/lib/hw/copybit.msm7k.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/copybit.A9.so
+adb pull /system/lib/hw/gps.default.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/gps.A9.so
 adb pull /system/lib/hw/gralloc.default.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/gralloc.default.so
-adb pull /system/lib/hw/gralloc.smdkv310.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/gralloc.GT-I9100.so
-adb pull /system/usr/keychars/Broadcom_Bluetooth_HID.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/Broadcom_Bluetooth_HID.kcm.bin
+adb pull /system/lib/hw/gralloc.msm7k.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/gralloc.A9.so
+
+
+# Keychars -  Edited
+adb pull /system/usr/keychars/7x27a_kp.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/7x27a_kp.kcm.bin
 adb pull /system/usr/keychars/qwerty2.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/qwerty2.kcm.bin
 adb pull /system/usr/keychars/qwerty.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/qwerty.kcm.bin
-adb pull /system/usr/keychars/sec_key.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/sec_key.kcm.bin
-adb pull /system/usr/keychars/sec_touchkey.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/sec_touchkey.kcm.bin
+# _ Not there ## adb pull /system/usr/keychars/sec_key.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/sec_key.kcm.bin
+adb pull /system/usr/keychars/surf_keypad.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/surf_keypad.kcm.bin
+
+
+# No vendor directory
 adb pull /system/vendor/firmware/bcm4330_aps.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/wifi/bcm4330_aps.bin
 adb pull /system/vendor/firmware/bcm4330_mfg.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/wifi/bcm4330_mfg.bin
 adb pull /system/vendor/firmware/bcm4330_sta.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/wifi/bcm4330_sta.bin
+
+
 adb pull /system/bin/alsa_amixer ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/alsa_amixer
 adb pull /system/bin/alsa_aplay ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/alsa_aplay
 adb pull /system/bin/alsa_ctl ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/alsa_ctl
@@ -121,6 +142,8 @@ adb pull /system/lib/libyamahasrc.so ../../../vendor/$MANUFACTURER/$DEVICE/propr
 adb pull /system/bin/charging_mode ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/charging_mode
 adb pull /system/bin/playlpm ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/playlpm
 adb pull /system/lib/libQmageDecoder.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/libQmageDecoder.so
+
+# Media - No battery charging images
 adb pull /system/media/battery_batteryerror.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_batteryerror.qmg
 adb pull /system/media/battery_charging_5.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_5.qmg
 adb pull /system/media/battery_charging_10.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_10.qmg
@@ -243,10 +266,10 @@ PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/cameradata/datapattern_front_420sp.yuv:system/cameradata/datapattern_front_420sp.yuv
 
 PRODUCT_COPY_FILES += \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/egl/libEGL_mali.so:system/lib/egl/libEGL_mali.so \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/egl/libEGL_adreno200.so:system/lib/egl/libEGL_adreno200.so \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/egl/libGLES_android.so:system/lib/egl/libGLES_android.so \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/egl/libGLESv1_CM_mali.so:system/lib/egl/libGLESv1_CM_mali.so \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/egl/libGLESv2_mali.so:system/lib/egl/libGLESv2_mali.so
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so
 
 PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/firmware/qt602240.fw:system/etc/firmware/qt602240.fw \\
@@ -259,17 +282,17 @@ PRODUCT_COPY_FILES += \\
 PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/hw/acoustics.default.so:system/lib/hw/acoustics.default.so \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/hw/alsa.default.so:system/lib/hw/alsa.default.so \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/hw/copybit.GT-I9100.so:system/lib/hw/copybit.smdkv310.so \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/hw/gps.GT-I9100.so:system/lib/hw/vendor-gps.smdkv310.so \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/hw/copybit.A9.so:system/lib/hw/copybit.msm7k.so \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/hw/gps.A9.so:system/lib/hw/gps.default.so \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/hw/gralloc.default.so:system/lib/hw/gralloc.default.so \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/hw/gralloc.GT-I9100.so:system/lib/hw/gralloc.smdkv310.so
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/hw/gralloc.A9.so:system/lib/hw/gralloc.msm7k.so
 
 PRODUCT_COPY_FILES += \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/keychars/Broadcom_Bluetooth_HID.kcm.bin:system/usr/keychars/Broadcom_Bluetooth_HID.kcm.bin \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/keychars/7x27a_kp.kcm.bin:system/usr/keychars/7x27a_kp.kcm.bin \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/keychars/sec_key.kcm.bin:system/usr/keychars/sec_key.kcm.bin \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/keychars/sec_touchkey.kcm.bin:system/usr/keychars/sec_touchkey.kcm.bin
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/keychars/surf_keypad.kcm.bin:system/usr/keychars/surf_keypad.kcm.bin
 
 PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/wifi/bcm4330_aps.bin:system/vendor/firmware/bcm4330_aps.bin \\
