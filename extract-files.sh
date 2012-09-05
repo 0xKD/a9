@@ -43,14 +43,25 @@ adb pull /system/lib/libcamera.so ../../../vendor/$MANUFACTURER/$DEVICE/propriet
 adb pull /system/lib/libEGL.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libEGL.so
 adb pull /system/lib/libexif.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libexif.so
 
+# Unknown
 adb pull /system/lib/libfimc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libfimc.so
 adb pull /system/lib/libfimg.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libfimg.so
+
+# GLES - Done
 adb pull /system/lib/libGLESv1_CM.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libGLESv1_CM.so
 adb pull /system/lib/libGLESv2.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libGLESv2.so
-adb pull /system/lib/libMali.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libMali.so
+
+# adb pull /system/lib/libMali.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libMali.so
+
+# OpenSLES - Done
 adb pull /system/lib/libOpenSLES.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libOpenSLES.so
+
+
 adb pull /system/lib/libPanoraMax3.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libPanoraMax3.so
+
+# RIL - Done
 adb pull /system/lib/libril.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libril.so
+
 adb pull /system/lib/libs5pjpeg.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libs5pjpeg.so
 adb pull /system/lib/libseccameraadaptor.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libseccameraadaptor.so
 adb pull /system/lib/libseccamera.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libseccamera.so
@@ -59,6 +70,8 @@ adb pull /system/lib/libsecjpegboard.so ../../../vendor/$MANUFACTURER/$DEVICE/pr
 adb pull /system/lib/libsecjpeginterface.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libsecjpeginterface.so
 adb pull /system/lib/libsecril-client.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libsecril-client.so
 adb pull /system/lib/libsec-ril.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libsec-ril.so
+
+# No TV-out / Comment/remove all
 adb pull /system/lib/libtvoutcec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libtvoutcec.so
 adb pull /system/lib/libtvoutddc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libtvoutddc.so
 adb pull /system/lib/libtvoutedid.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libtvoutedid.so
@@ -69,36 +82,45 @@ adb pull /system/lib/libtvouthdmi.so ../../../vendor/$MANUFACTURER/$DEVICE/propr
 adb pull /system/lib/libtvout_jni.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libtvout_jni.so
 adb pull /system/lib/libtvoutservice.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libtvoutservice.so
 adb pull /system/lib/libtvout.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libtvout.so
-adb pull /system/bin/BCM4330B1_002.001.003.0221.0265.hcd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/BCM4330B1_002.001.003.0221.0265.hcd
+
+# BT?
+# adb pull /system/bin/BCM4330B1_002.001.003.0221.0265.hcd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/BCM4330B1_002.001.003.0221.0265.hcd
+
+# Rild - Done
 adb pull /system/bin/rild ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/rild
-adb pull /system/bin/tvoutserver ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/tvoutserver
+
+#adb pull /system/bin/tvoutserver ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/tvoutserver
 #adb pull /system/cameradata/datapattern_420sp.yuv ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/cameradata/datapattern_420sp.yuv
 #adb pull /system/cameradata/datapattern_front_420sp.yuv ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/cameradata/datapattern_front_420sp.yuv
 
-# /lib/egl - Edited
+# /lib/egl - Edited - Done
 adb pull /system/lib/egl/libEGL_adreno200.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl/libEGL_adreno200.so
 adb pull /system/lib/egl/libGLES_android.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl/libGLES_android.so
 adb pull /system/lib/egl/libGLESv1_CM_adreno200.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl/libGLESv1_CM_adreno200.so
 adb pull /system/lib/egl/libGLESv2_adreno200.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl/libGLESv2_adreno200.so
 # _ Consider adding libq3dtools_adreno200.so ^ Same directory
 
-# /etc/firmware - Decide...
-adb pull /system/etc/firmware/qt602240.fw ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/qt602240.fw
-adb pull /system/etc/firmware/RS_M5LS_OB.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/RS_M5LS_OB.bin
-adb pull /system/etc/firmware/RS_M5LS_OC.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/RS_M5LS_OC.bin
-adb pull /system/etc/firmware/RS_M5LS_OE.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/RS_M5LS_OE.bin
-adb pull /system/etc/firmware/RS_M5LS_TB.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/RS_M5LS_TB.bin
+# /etc/firmware - Added own
+adb pull /system/etc/firmware/brcm_bt.hcd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/brcm_bt.hcd
+adb pull /system/etc/firmware/yamato_pm4.fw ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/yamato_pm4.fw
+adb pull /system/etc/firmware/fw_bcm4330.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/fw_bcm4330.bin
+adb pull /system/etc/firmware/fw_bcm4330_apsta.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/fw_bcm4330_apsta.bin
+adb pull /system/etc/firmware/yamato_pfp.fw ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/yamato_pfp.fw
 
 
 # No vendor directory ## adb pull /system/vendor/firmware/mfc_fw.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/mfc_fw.bin
 adb pull /system/lib/hw/acoustics.default.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/acoustics.default.so
 adb pull /system/lib/hw/alsa.default.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/alsa.default.so
 
-# Edited
+# HW - Done
 adb pull /system/lib/hw/copybit.msm7k.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/copybit.A9.so
 adb pull /system/lib/hw/gps.default.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/gps.A9.so
 adb pull /system/lib/hw/gralloc.default.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/gralloc.default.so
 adb pull /system/lib/hw/gralloc.msm7k.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/gralloc.A9.so
+
+# Lights / Sensors : Self-added
+adb pull /system/lib/hw/lights.msm7k.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/lights.msm7k.so
+adb pull /system/lib/hw/sensors.msm7k.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/sensors.msm7k.so
 
 
 # Keychars -  Edited
