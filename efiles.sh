@@ -21,6 +21,11 @@ adb pull /system/bin/qmuxd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin
 adb pull /system/bin/brcm_patchram_plus ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin
 adb pull /system/bin/wl.. ../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin
 adb pull /system/bin/rild ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin
+adb pull /system/bin/vold ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin
+adb pull /system/bin/bluetoothd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin
+
+# rmt_storage
+adb pull /system/bin/rmt_storage ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin
 
 # etc/firmware
 adb pull /system/etc/firmware/yamato_pfp.fw ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/firmware
@@ -28,6 +33,8 @@ adb pull /system/etc/firmware/yamato_pm4.fw ../../../vendor/$MANUFACTURER/$DEVIC
 adb pull /system/etc/firmware/brcm_bt.hcd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/firmware
 adb pull /system/etc/firmware/wifimac ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/firmware
 adb pull /system/etc/firmware/nvram_bcm4330b2.txt ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/firmware
+
+# Alleged WiFi
 adb pull /system/etc/firmware/fw_bcm4330.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/firmware
 adb pull /system/etc/firmware/fw_bcm4330_apsta.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/firmware
 
@@ -56,6 +63,8 @@ adb pull /system/etc/gps.conf ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/
 adb pull /system/etc/vold.fstab ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc
 adb pull /system/etc/dbus.conf ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc
 adb pull /system/etc/01_qcomm_omx.cfg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc
+
+adb pull /system/lib/libacc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
 
 # lib/egl
 adb pull /system/lib/egl/egl.cfg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/egl
@@ -167,3 +176,35 @@ adb pull /system/lib/libOmxVp8Dec.so ../../../vendor/$MANUFACTURER/$DEVICE/propr
 adb pull /system/lib/libOmxWmaDec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
 adb pull /system/lib/libOmxWmvDec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
 adb pull /system/lib/libOmxrv9Dec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+
+# Pull Opencore libs
+adb pull /system/lib/libopencorehw.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_author.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_common.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_downloadreg.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_download.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_mp4localreg.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_mp4local.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_net_support.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_player.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_rtspreg.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_rtsp.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+
+# Shared libs
+adb pull /system/lib/libomx_amrenc_sharedlibrary.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libomx_amrdec_sharedlibrary.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libomx_avcdec_sharedlibrary.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libomx_mp3dec_sharedlibrary.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libomx_m4vdec_sharedlibrary.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libomx_sharedlibrary.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libomx_aacdec_sharedlibrary.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+
+# Stagefright
+adb pull /system/lib/libstagefright_enc_common.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libstagefright_avc_common.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libstagefright_color_conversion.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libstagefrighthw.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libstagefright.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libstagefright_amrnb_common.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libstagefright_omx.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libstagefright_foundation.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
