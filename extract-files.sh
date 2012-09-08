@@ -127,7 +127,6 @@ adb pull /system/lib/hw/sensors.msm7k.so ../../../vendor/$MANUFACTURER/$DEVICE/p
 adb pull /system/usr/keychars/7x27a_kp.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/7x27a_kp.kcm.bin
 adb pull /system/usr/keychars/qwerty2.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/qwerty2.kcm.bin
 adb pull /system/usr/keychars/qwerty.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/qwerty.kcm.bin
-# _ Not there ## adb pull /system/usr/keychars/sec_key.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/sec_key.kcm.bin
 adb pull /system/usr/keychars/surf_keypad.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/surf_keypad.kcm.bin
 
 
