@@ -15,7 +15,6 @@
 # limitations under the License.
 
 DEVICE=a9
-#DEVICE=c1-DEVICE
 MANUFACTURER=karbon
 
 mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE
@@ -36,22 +35,22 @@ mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE
 # limitations under the License.
 
 # Live wallpaper packages and Themes
-PRODUCT_PACKAGES := \\
-    LiveWallpapers \\
-    LiveWallpapersPicker \\
-    MagicSmokeWallpapers \\
-    VisualizationWallpapers \\
-    librs_jni
+PRODUCT_PACKAGES += \
+    LiveWallpapers \
+    LiveWallpapersPicker \
+    VisualizationWallpapers \
+    MagicSmokeWallpapers \
+    VisualizationWallpapers \
+	Gallery3d \
+    SpareParts \
+    Development \
 
 # Publish that we support the live wallpaper feature.
 PRODUCT_COPY_FILES := \\
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml
 
-# Pick up overlay for features that depend on non-open-source files
-DEVICE_PACKAGE_OVERLAYS := vendor/__MANUFACTURER__/c1-DEVICE/overlay
 
 \$(call inherit-product, vendor/__MANUFACTURER__/__DEVICE__/__DEVICE__-vendor-blobs.mk)
-\$(call inherit-product, vendor/__MANUFACTURER__/__DEVICE__/c1-vendor-blobs.mk)
 EOF
 
 
@@ -70,9 +69,7 @@ EOF
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-USE_CAMERA_STUB := false
-BOARD_USES_GENERIC_AUDIO := false
-BOARD_USES_LIBSECRIL_STUB := false
+USE_CAMERA_STUB := true
 
 EOF
 
