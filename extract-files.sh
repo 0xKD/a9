@@ -1,382 +1,428 @@
 #!/bin/sh
 
-# Copyright (C) 2010 The Android Open Source Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 DEVICE=a9
 MANUFACTURER=karbon
 
+# Creating directories
 mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary
-mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio
-mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/cameradata
-mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl
-mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware
-mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw
-mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars
-mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/wifi
-mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging
+mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/app
+mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin
+mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/firmware
+mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/wifi
+mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/bluetooth
+mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/egl
+mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/hw
+mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/usr/keychars
+mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/usr/keylayout
 
-# a9 - Unedited
-#adb pull /system/lib/libActionShot.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libActionShot.so
-#adb pull /system/lib/libakm.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libakm.so
-#adb pull /system/lib/libarccamera.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libarccamera.so
 
-# Camera - Done
-adb pull /system/lib/libcamera_client.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libcamera_client.so
-adb pull /system/lib/libcameraservice.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libcameraservice.so
-adb pull /system/lib/libcamera.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libcamera.so
+# Bins
+adb pull /system/bin/qmuxd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin
+adb pull /system/bin/brcm_patchram_plus ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin
+adb pull /system/bin/wl ../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin
+adb pull /system/bin/rild ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin
+adb pull /system/bin/vold ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin
+adb pull /system/bin/bluetoothd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin
 
-#adb pull /system/lib/libcaps.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libcaps.so
+# rmt_storage
+adb pull /system/bin/rmt_storage ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/bin
 
-# EGL - Done
-adb pull /system/lib/libEGL.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libEGL.so
-adb pull /system/lib/libexif.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libexif.so
+# etc/firmware
+adb pull /system/etc/firmware/yamato_pfp.fw ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/firmware
+adb pull /system/etc/firmware/yamato_pm4.fw ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/firmware
+adb pull /system/etc/firmware/brcm_bt.hcd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/firmware
+adb pull /system/etc/firmware/wifimac ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/firmware
+adb pull /system/etc/firmware/nvram_bcm4330b2.txt ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/firmware
 
-# Unknown
-#adb pull /system/lib/libfimc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libfimc.so
-#adb pull /system/lib/libfimg.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libfimg.so
+# Alleged WiFi
+adb pull /system/etc/firmware/fw_bcm4330.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/firmware
+adb pull /system/etc/firmware/fw_bcm4330_apsta.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/firmware
 
-# GLES - Done
-adb pull /system/lib/libGLESv1_CM.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libGLESv1_CM.so
-adb pull /system/lib/libGLESv2.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libGLESv2.so
+# WiFi
+adb pull /system/etc/wifi/wpa_supplicant.conf ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/wifi
+ 
+# Bluetooth
+adb pull /system/etc/bluetooth/blacklist.conf ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/bluetooth
+adb pull /system/etc/bluetooth/auto_pairing.conf ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/bluetooth
+adb pull /system/etc/bluetooth/audio.conf ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/bluetooth
+adb pull /system/etc/bluetooth/input.conf ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc/bluetooth
 
-# adb pull /system/lib/libMali.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libMali.so
+# Init scripts
+adb pull /system/etc/init.goldfish.sh ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc
+adb pull /system/etc/init.qcom.wifi.sh ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc
+adb pull /system/etc/init.qcom.bt.sh ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc
+adb pull /system/etc/init.qcom.fm.sh ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc
+adb pull /system/etc/init.qcom.coex.sh ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc
+adb pull /system/etc/init.qcom.post_boot.sh ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc
+adb pull /system/etc/init.qcom.composition_type.sh ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc
+adb pull /system/etc/init.qcom.sdio.sh ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc
+
+
+# etc
+adb pull /system/etc/gps.conf ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc
+adb pull /system/etc/vold.fstab ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc
+adb pull /system/etc/dbus.conf ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc
+adb pull /system/etc/01_qcomm_omx.cfg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/etc
+
+adb pull /system/lib/libacc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+
+# lib/egl
+adb pull /system/lib/egl/egl.cfg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/egl
+adb pull /system/lib/egl/libEGL_adreno200.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/egl
+adb pull /system/lib/egl/libGLES_android.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/egl
+adb pull /system/lib/egl/libGLESv1_CM_adreno200.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/egl
+adb pull /system/lib/egl/libGLESv2_adreno200.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/egl
+adb pull /system/lib/egl/libq3dtools_adreno200.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/egl
+
+# hw
+adb pull /system/lib/hw/copybit.msm7k.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/hw
+adb pull /system/lib/hw/gps.default.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/hw
+adb pull /system/lib/hw/gralloc.default.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/hw
+adb pull /system/lib/hw/sensors.msm7k.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/hw
+adb pull /system/lib/hw/gralloc.msm7k.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/hw
+adb pull /system/lib/hw/libloc_eng_v01.default.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/hw
+adb pull /system/lib/hw/lights.msm7k.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib/hw
+
+# Audio
+adb pull /system/lib/libaudio.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libaudioalsa.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libaudioeffect_jni.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libaudioeq.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libaudioflinger.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libaudiopolicy.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+
+adb pull /system/lib/libauth.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libcm.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libdiag.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libdl.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libdsm.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libdss.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+
+adb pull /system/lib/libgsdi_exp.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libgsl.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libgstk_exp.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libmmgsdilib.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libnv.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/liboem_rapi.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/liboncrpc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libpbmlib.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libqmi.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libqmiservices.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libqueue.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+
+# RIL
+adb pull /system/lib/libril.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libril-qc-1.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libril-qcril-hook-oem.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
 
 # OpenSLES - Done
-adb pull /system/lib/libOpenSLES.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libOpenSLES.so
+adb pull /system/lib/libOpenSLES.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
 
+# libwms
+adb pull /system/lib/libwms.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libwmsts.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
 
-#adb pull /system/lib/libPanoraMax3.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libPanoraMax3.so
+# libloc
+adb pull /system/lib/libloc_api-rpc-qc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libloc_ext.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libloc_ext_v01.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
 
-# RIL - Done
-adb pull /system/lib/libril.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libril.so
+# libmm
+adb pull /system/lib/libmmipl.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libmmjpeg.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libjpeg.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
 
-#adb pull /system/lib/libs5pjpeg.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libs5pjpeg.so
-#adb pull /system/lib/libseccameraadaptor.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libseccameraadaptor.so
-#adb pull /system/lib/libseccamera.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libseccamera.so
-#adb pull /system/lib/libsecjpegarcsoft.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libsecjpegarcsoft.so
-#adb pull /system/lib/libsecjpegboard.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libsecjpegboard.so
-#adb pull /system/lib/libsecjpeginterface.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libsecjpeginterface.so
-#adb pull /system/lib/libsecril-client.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libsecril-client.so
-#adb pull /system/lib/libsec-ril.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libsec-ril.so
+# Camera
+adb pull /system/lib/libcamera.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libcamera_client.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libcameraservice.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/liboemcamera.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
 
-# No TV-out / Comment/remove all
-#adb pull /system/lib/libtvoutcec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libtvoutcec.so
-#adb pull /system/lib/libtvoutddc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libtvoutddc.so
-#adb pull /system/lib/libtvoutedid.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libtvoutedid.so
-#adb pull /system/lib/lib_tvoutengine.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib_tvoutengine.so
-#adb pull /system/lib/libtvoutfimc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libtvoutfimc.so
-#adb pull /system/lib/libtvoutfimg.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libtvoutfimg.so
-#adb pull /system/lib/libtvouthdmi.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libtvouthdmi.so
-#adb pull /system/lib/libtvout_jni.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libtvout_jni.so
-#adb pull /system/lib/libtvoutservice.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libtvoutservice.so
-#adb pull /system/lib/libtvout.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libtvout.so
+# Keychars
+adb pull /system/usr/keychars/7x27a_kp.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/usr/keychars
+adb pull /system/usr/keychars/qwerty2.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/usr/keychars
+adb pull /system/usr/keychars/qwerty.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/usr/keychars
+adb pull /system/usr/keychars/surf_keypad.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/usr/keychars
 
-# BT?
-# adb pull /system/bin/BCM4330B1_002.001.003.0221.0265.hcd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/BCM4330B1_002.001.003.0221.0265.hcd
+# Keylayout
+adb pull /system/usr/keylayout/surf_keypad.kl ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/usr/keylayout
+adb pull /system/usr/keylayout/AVRCP.kl ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/usr/keylayout
+adb pull /system/usr/keylayout/7x27a_kp.kl ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/usr/keylayout
+adb pull /system/usr/keylayout/qwerty.kl ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/usr/keylayout
+adb pull /system/usr/keylayout/7k_handset.kl ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/usr/keylayout
 
-# Rild - Done
-adb pull /system/bin/rild ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/rild
+# omx
+adb pull /system/lib/libmm-adspsvc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxAacDec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxAacEnc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxAdpcmDec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxAmrDec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxAmrEnc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxAmrRtpDec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxAmrwbDec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxCore.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxEvrcDec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxEvrcEnc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxEvrcHwDec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxH264Dec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxMp3Dec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxMpeg4Dec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxOn2Dec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxQcelp13Dec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxQcelp13Enc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxQcelpHwDec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxVidEnc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxVp8Dec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxWmaDec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxWmvDec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libOmxrv9Dec.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
 
-#adb pull /system/bin/tvoutserver ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/tvoutserver
-#adb pull /system/cameradata/datapattern_420sp.yuv ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/cameradata/datapattern_420sp.yuv
-#adb pull /system/cameradata/datapattern_front_420sp.yuv ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/cameradata/datapattern_front_420sp.yuv
+# Pull Opencore libs
+adb pull /system/lib/libopencorehw.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_author.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_common.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_downloadreg.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_download.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_mp4localreg.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_mp4local.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_net_support.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_player.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_rtspreg.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libopencore_rtsp.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
 
-# /lib/egl - Edited - Done
-adb pull /system/lib/egl/libEGL_adreno200.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl/libEGL_adreno200.so
-adb pull /system/lib/egl/libGLES_android.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl/libGLES_android.so
-adb pull /system/lib/egl/libGLESv1_CM_adreno200.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl/libGLESv1_CM_adreno200.so
-adb pull /system/lib/egl/libGLESv2_adreno200.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/egl/libGLESv2_adreno200.so
-# _ Consider adding libq3dtools_adreno200.so ^ Same directory
+# Shared libs
+adb pull /system/lib/libomx_amrenc_sharedlibrary.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libomx_amrdec_sharedlibrary.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libomx_avcdec_sharedlibrary.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libomx_mp3dec_sharedlibrary.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libomx_m4vdec_sharedlibrary.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libomx_sharedlibrary.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libomx_aacdec_sharedlibrary.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
 
-# /etc/firmware - Added own
-adb pull /system/etc/firmware/brcm_bt.hcd ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/brcm_bt.hcd
-adb pull /system/etc/firmware/yamato_pm4.fw ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/yamato_pm4.fw
-adb pull /system/etc/firmware/fw_bcm4330.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/fw_bcm4330.bin
-adb pull /system/etc/firmware/fw_bcm4330_apsta.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/fw_bcm4330_apsta.bin
-adb pull /system/etc/firmware/yamato_pfp.fw ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/yamato_pfp.fw
+# Stagefright
+adb pull /system/lib/libstagefright_enc_common.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libstagefright_avc_common.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libstagefright_color_conversion.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libstagefrighthw.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libstagefright.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libstagefright_amrnb_common.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libstagefright_omx.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
+adb pull /system/lib/libstagefright_foundation.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/lib
 
+(cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/karbon/$DEVICE/$DEVICE-vendor-blobs.mk
+# Copyright (C) 2010 The Android Open Source Project \\
+# \\
+# Licensed under the Apache License, Version 2.0 (the "License"); \\
+# you may not use this file except in compliance with the License. \\
+# You may obtain a copy of the License at: \\
+# \\
+#      http://www.apache.org/licenses/LICENSE-2.0 \\
+# \\
+# Unless required by applicable law or agreed to in writing, software \\
+# distributed under the License is distributed on an "AS IS" BASIS, \\
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. \\
+# See the License for the specific language governing permissions and \\
+# limitations under the License.: \\
 
-# No vendor directory ## adb pull /system/vendor/firmware/mfc_fw.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/firmware/mfc_fw.bin
-#adb pull /system/lib/hw/acoustics.default.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/acoustics.default.so
-#adb pull /system/lib/hw/alsa.default.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/alsa.default.so
+# This file is generated by device/karbon/__DEVICE__/extract-files.sh - DO NOT EDIT \\
 
-# HW - Done
-adb pull /system/lib/hw/copybit.msm7k.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/copybit.A9.so
-adb pull /system/lib/hw/gps.default.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/gps.A9.so
-adb pull /system/lib/hw/gralloc.default.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/gralloc.default.so
-adb pull /system/lib/hw/gralloc.msm7k.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/gralloc.A9.so
-
-# Lights / Sensors : Self-added
-adb pull /system/lib/hw/lights.msm7k.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/lights.msm7k.so
-adb pull /system/lib/hw/sensors.msm7k.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/hw/sensors.msm7k.so
-
-
-# Keychars -  Edited
-adb pull /system/usr/keychars/7x27a_kp.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/7x27a_kp.kcm.bin
-adb pull /system/usr/keychars/qwerty2.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/qwerty2.kcm.bin
-adb pull /system/usr/keychars/qwerty.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/qwerty.kcm.bin
-adb pull /system/usr/keychars/surf_keypad.kcm.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/keychars/surf_keypad.kcm.bin
-
-
-# No vendor directory
-#adb pull /system/vendor/firmware/bcm4330_aps.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/wifi/bcm4330_aps.bin
-#adb pull /system/vendor/firmware/bcm4330_mfg.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/wifi/bcm4330_mfg.bin
-#adb pull /system/vendor/firmware/bcm4330_sta.bin ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/wifi/bcm4330_sta.bin
-
-
-#adb pull /system/bin/alsa_amixer ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/alsa_amixer
-#adb pull /system/bin/alsa_aplay ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/alsa_aplay
-#adb pull /system/bin/alsa_ctl ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/alsa_ctl
-#adb pull /system/bin/alsa_ucm ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/alsa_ucm
-#adb pull /system/lib/libasound.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libasound.so
-#adb pull /system/lib/libaudio.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libaudio.so
-#adb pull /system/lib/libaudioeffect_jni.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libaudioeffect_jni.so
-#adb pull /system/lib/libaudiohw_op.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libaudiohw_op.so
-#adb pull /system/lib/libaudiohw_sf.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libaudiohw_sf.so
-#adb pull /system/lib/libaudiopolicy.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libaudiopolicy.so
-#adb pull /system/lib/liblvvefs.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/liblvvefs.so
-#adb pull /system/lib/libmediayamaha.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libmediayamaha.so
-#adb pull /system/lib/libmediayamaha_jni.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libmediayamaha_jni.so
-#adb pull /system/lib/libmediayamahaservice.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libmediayamahaservice.so
-#adb pull /system/lib/libmediayamaha_tuning_jni.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libmediayamaha_tuning_jni.so
-#adb pull /system/lib/libkarbonAcousticeq.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libkarbonAcousticeq.so
-#adb pull /system/lib/lib_karbon_Acoustic_Module_Llite.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/lib_karbon_Acoustic_Module_Llite.so
-#adb pull /system/lib/lib_karbon_Resampler.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/lib_karbon_Resampler.so
-#adb pull /system/lib/libkarbonSoundbooster.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libkarbonSoundbooster.so
-#adb pull /system/lib/lib_karbon_Sound_Booster.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/lib_karbon_Sound_Booster.so
-#adb pull /system/lib/libsoundalive.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libsoundalive.so
-#adb pull /system/lib/libsoundpool.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libsoundpool.so
-#adb pull /system/lib/libSR_AudioIn.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libSR_AudioIn.so
-#adb pull /system/lib/libyamahasrc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/audio/libyamahasrc.so
-#adb pull /system/bin/charging_mode ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/charging_mode
-#adb pull /system/bin/playlpm ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/playlpm
-#adb pull /system/lib/libQmageDecoder.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/libQmageDecoder.so
-
-# Media - No battery charging images
-#adb pull /system/media/battery_batteryerror.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_batteryerror.qmg
-#adb pull /system/media/battery_charging_5.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_5.qmg
-#adb pull /system/media/battery_charging_10.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_10.qmg
-#adb pull /system/media/battery_charging_15.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_15.qmg
-#adb pull /system/media/battery_charging_20.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_20.qmg
-#adb pull /system/media/battery_charging_25.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_25.qmg
-#adb pull /system/media/battery_charging_30.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_30.qmg
-#adb pull /system/media/battery_charging_35.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_35.qmg
-#adb pull /system/media/battery_charging_40.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_40.qmg
-#adb pull /system/media/battery_charging_45.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_45.qmg
-#adb pull /system/media/battery_charging_50.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_50.qmg
-#adb pull /system/media/battery_charging_55.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_55.qmg
-#adb pull /system/media/battery_charging_60.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_60.qmg
-#adb pull /system/media/battery_charging_65.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_65.qmg
-#adb pull /system/media/battery_charging_70.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_70.qmg
-#adb pull /system/media/battery_charging_75.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_75.qmg
-#adb pull /system/media/battery_charging_80.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_80.qmg
-#adb pull /system/media/battery_charging_85.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_85.qmg
-#adb pull /system/media/battery_charging_90.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_90.qmg
-#adb pull /system/media/battery_charging_95.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_95.qmg
-#adb pull /system/media/battery_charging_100.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_charging_100.qmg
-#adb pull /system/media/battery_error.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/battery_error.qmg
-#adb pull /system/media/chargingwarning.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/chargingwarning.qmg
-#adb pull /system/media/Disconnected.qmg ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/offmode_charging/Disconnected.qmg
-
-
-(cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__MANUFACTURER__/$MANUFACTURER/g > ../../../vendor/$MANUFACTURER/$DEVICE/$DEVICE-vendor-blobs.mk
-# Copyright (C) 2010 The Android Open Source Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Prebuilt libraries that are needed to build open-source libraries
-PRODUCT_COPY_FILES := \\
-
-# All the blobs necessary for a9 devices
+# All the blobs necessary for a9
 PRODUCT_COPY_FILES += \\
+	vendor/karbon/__DEVICE__/proprietary/bin/qmuxd:/system/bin/qmuxd \\
+	vendor/karbon/__DEVICE__/proprietary/bin/brcm_patchram_plus:/system/bin/brcm_patchram_plus \\
+	vendor/karbon/__DEVICE__/proprietary/bin/wl:/system/bin/wl \\
+	vendor/karbon/__DEVICE__/proprietary/bin/rild:/system/bin/rild \\
+	vendor/karbon/__DEVICE__/proprietary/bin/vold:/system/bin/vold \\
+	vendor/karbon/__DEVICE__/proprietary/bin/bluetoothd:/system/bin/bluetoothd \\
+	vendor/karbon/__DEVICE__/proprietary/bin/rmt_storage:/system/bin/rmt_storage
 
-EOF
-
-
-(cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__MANUFACTURER__/$MANUFACTURER/g > ../../../vendor/$MANUFACTURER/$DEVICE/c1-vendor-blobs.mk
-# Copyright (C) 2010 The Android Open Source Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Prebuilt libraries that are needed to build open-source libraries
-PRODUCT_COPY_FILES := \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libcamera.so:obj/lib/libcamera.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libril.so:obj/lib/libril.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libsecril-client.so:obj/lib/libsecril-client.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libaudio.so:obj/lib/libaudio.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libmediayamahaservice.so:obj/lib/libmediayamahaservice.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libaudiopolicy.so:obj/lib/libaudiopolicy.so
-
-# All the blobs necessary for a9 devices
+# Firmwares: \\
 PRODUCT_COPY_FILES += \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libActionShot.so:system/lib/libActionShot.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libakm.so:system/lib/libakm.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libarccamera.so:system/lib/libarccamera.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libcamera_client.so:system/lib/libcamera_client.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libcameraservice.so:system/lib/libcameraservice.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libcamera.so:system/lib/libcamera.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libcaps.so:system/lib/libcaps.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libEGL.so:system/lib/libEGL.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libexif.so:system/lib/libexif.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libfimc.so:system/lib/libfimc.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libfimg.so:system/lib/libfimg.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libGLESv1_CM.so:system/lib/libGLESv1_CM.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libGLESv2.so:system/lib/libGLESv2.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libMali.so:system/lib/libMali.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libOpenSLES.so:system/lib/libOpenSLES.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libPanoraMax3.so:system/lib/libPanoraMax3.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libril.so:system/lib/libril.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libs5pjpeg.so:system/lib/libs5pjpeg.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libseccameraadaptor.so:system/lib/libseccameraadaptor.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libseccamera.so:system/lib/libseccamera.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libsecjpegarcsoft.so:system/lib/libsecjpegarcsoft.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libsecjpegboard.so:system/lib/libsecjpegboard.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libsecjpeginterface.so:system/lib/libsecjpeginterface.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libsecril-client.so:system/lib/libsecril-client.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libsec-ril.so:system/lib/libsec-ril.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libtvoutcec.so:system/lib/libtvoutcec.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libtvoutddc.so:system/lib/libtvoutddc.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libtvoutedid.so:system/lib/libtvoutedid.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/lib_tvoutengine.so:system/lib/lib_tvoutengine.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libtvoutfimc.so:system/lib/libtvoutfimc.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libtvoutfimg.so:system/lib/libtvoutfimg.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libtvouthdmi.so:system/lib/libtvouthdmi.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libtvout_jni.so:system/lib/libtvout_jni.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libtvoutservice.so:system/lib/libtvoutservice.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libtvout.so:system/lib/libtvout.so
+	vendor/karbon/__DEVICE__/proprietary/etc/firmware/yamato_pfp.fw:/system/etc/firmware/yamato_pfp.fw \\
+	vendor/karbon/__DEVICE__/proprietary/etc/firmware/yamato_pm4.fw:/system/etc/firmware/yamato_pm4.fw \\
+	vendor/karbon/__DEVICE__/proprietary/etc/firmware/brcm_bt.hcd:/system/etc/firmware/brcm_bt.hcd \\
+	vendor/karbon/__DEVICE__/proprietary/etc/firmware/wifimac:/system/etc/firmware/wifimac \\
+	vendor/karbon/__DEVICE__/proprietary/etc/firmware/nvram_bcm4330b2.txt:/system/etc/firmware/nvram_bcm4330b2.txt
+
+# WiFi: \\
+PRODUCT_COPY_FILES += \\
+	vendor/karbon/__DEVICE__/proprietary/etc/firmware/fw_bcm4330.bin:/system/etc/firmware/fw_bcm4330.bin \\
+	vendor/karbon/__DEVICE__/proprietary/etc/firmware/fw_bcm4330_apsta.bin:/system/etc/firmware/fw_bcm4330_apsta.bin \\
+	vendor/karbon/__DEVICE__/proprietary/etc/wifi/wpa_supplicant.conf:/system/etc/wifi/wpa_supplicant.conf
+
+# Bluetooth: \\
+PRODUCT_COPY_FILES += \\
+	vendor/karbon/__DEVICE__/proprietary/etc/bluetooth/blacklist.conf:/system/etc/bluetooth/blacklist.conf \\
+	vendor/karbon/__DEVICE__/proprietary/etc/bluetooth/auto_pairing.conf:/system/etc/bluetooth/auto_pairing.conf \\
+	vendor/karbon/__DEVICE__/proprietary/etc/bluetooth/audio.conf:/system/etc/bluetooth/audio.conf \\
+	vendor/karbon/__DEVICE__/proprietary/etc/bluetooth/input.conf:/system/etc/bluetooth/input.conf
+
+# etc: \\
+PRODUCT_COPY_FILES += \\
+	vendor/karbon/__DEVICE__/proprietary/etc/gps.conf:/system/etc/gps.conf \\
+	vendor/karbon/__DEVICE__/proprietary/etc/vold.fstab:/system/etc/vold.fstab \\
+	vendor/karbon/__DEVICE__/proprietary/etc/dbus.conf:/system/etc/dbus.conf \\
+	vendor/karbon/__DEVICE__/proprietary/etc/01_qcomm_omx.cfg:/system/etc/01_qcomm_omx.cfg \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libacc.so:/system/lib/libacc.so
+
+# lib/egl: \\
+PRODUCT_COPY_FILES += \\
+	vendor/karbon/__DEVICE__/proprietary/lib/egl/egl.cfg:/system/lib/egl/egl.cfg \\
+	vendor/karbon/__DEVICE__/proprietary/lib/egl/libEGL_adreno200.so:/system/lib/egl/libEGL_adreno200.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/egl/libGLES_android.so:/system/lib/egl/libGLES_android.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/egl/libGLESv1_CM_adreno200.so:/system/lib/egl/libGLESv1_CM_adreno200.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/egl/libGLESv2_adreno200.so:/system/lib/egl/libGLESv2_adreno200.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/egl/libq3dtools_adreno200.so:/system/lib/egl/libq3dtools_adreno200.so
+
+# hw: \\
+PRODUCT_COPY_FILES += \\
+	vendor/karbon/__DEVICE__/proprietary/lib/hw/copybit.msm7k.so:/system/lib/hw/copybit.msm7k.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/hw/gps.default.so:/system/lib/hw/gps.default.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/hw/gralloc.default.so:/system/lib/hw/gralloc.default.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/hw/sensors.msm7k.so:/system/lib/hw/sensors.msm7k.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/hw/gralloc.msm7k.so:/system/lib/hw/gralloc.msm7k.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/hw/libloc_eng_v01.default.so:/system/lib/hw/libloc_eng_v01.default.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/hw/lights.msm7k.so:/system/lib/hw/lights.msm7k.so
+
+# Audio: \\
+PRODUCT_COPY_FILES += \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libaudio.so:/system/lib/libaudio.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libaudioalsa.so:/system/lib/libaudioalsa.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libaudioeffect_jni.so:/system/lib/libaudioeffect_jni.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libaudioeq.so:/system/lib/libaudioeq.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libaudioflinger.so:/system/lib/libaudioflinger.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libaudiopolicy.so:/system/lib/libaudiopolicy.so
 
 PRODUCT_COPY_FILES += \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/BCM4330B1_002.001.003.0221.0265.hcd:system/bin/BCM4330B1_002.001.003.0221.0265.hcd \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/rild:system/bin/rild \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/tvoutserver:system/bin/tvoutserver
+	vendor/karbon/__DEVICE__/proprietary/lib/libauth.so:/system/lib/libauth.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libcm.so:/system/lib/libcm.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libdiag.so:/system/lib/libdiag.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libdl.so:/system/lib/libdl.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libdsm.so:/system/lib/libdsm.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libdss.so:/system/lib/libdss.so
 
 PRODUCT_COPY_FILES += \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/cameradata/datapattern_420sp.yuv:system/cameradata/datapattern_420sp.yuv \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/cameradata/datapattern_front_420sp.yuv:system/cameradata/datapattern_front_420sp.yuv
+	vendor/karbon/__DEVICE__/proprietary/lib/libgsdi_exp.so:/system/lib/libgsdi_exp.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libgsl.so:/system/lib/libgsl.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libgstk_exp.so:/system/lib/libgstk_exp.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libmmgsdilib.so:/system/lib/libmmgsdilib.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libnv.so:/system/lib/libnv.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/liboem_rapi.so:/system/lib/liboem_rapi.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/liboncrpc.so:/system/lib/liboncrpc.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libpbmlib.so:/system/lib/libpbmlib.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libqmi.so:/system/lib/libqmi.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libqmiservices.so:/system/lib/libqmiservices.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libqueue.so:/system/lib/libqueue.so
 
+# RIL: \\
 PRODUCT_COPY_FILES += \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/egl/libEGL_adreno200.so:system/lib/egl/libEGL_adreno200.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/egl/libGLES_android.so:system/lib/egl/libGLES_android.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so
+	vendor/karbon/__DEVICE__/proprietary/lib/libril.so:/system/lib/libril.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libril-qc-1.so:/system/lib/libril-qc-1.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libril-qcril-hook-oem.so:/system/lib/libril-qcril-hook-oem.so
 
+# OpenSLES - Done: \\
 PRODUCT_COPY_FILES += \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/firmware/qt602240.fw:system/etc/firmware/qt602240.fw \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/firmware/RS_M5LS_OB.bin:system/etc/firmware/RS_M5LS_OB.bin \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/firmware/RS_M5LS_OC.bin:system/etc/firmware/RS_M5LS_OC.bin \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/firmware/RS_M5LS_OE.bin:system/etc/firmware/RS_M5LS_OE.bin \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/firmware/RS_M5LS_TB.bin:system/etc/firmware/RS_M5LS_TB.bin \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/firmware/mfc_fw.bin:system/vendor/firmware/mfc_fw.bin
+	vendor/karbon/__DEVICE__/proprietary/lib/libOpenSLES.so:/system/lib/libOpenSLES.so \\
 
+# libwms: \\
 PRODUCT_COPY_FILES += \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/hw/acoustics.default.so:system/lib/hw/acoustics.default.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/hw/alsa.default.so:system/lib/hw/alsa.default.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/hw/copybit.A9.so:system/lib/hw/copybit.msm7k.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/hw/gps.A9.so:system/lib/hw/gps.default.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/hw/gralloc.default.so:system/lib/hw/gralloc.default.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/hw/gralloc.A9.so:system/lib/hw/gralloc.msm7k.so
+	vendor/karbon/__DEVICE__/proprietary/lib/libwms.so:/system/lib/libwms.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libwmsts.so:/system/lib/libwmsts.so
 
+# libloc: \\
 PRODUCT_COPY_FILES += \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/keychars/7x27a_kp.kcm.bin:system/usr/keychars/7x27a_kp.kcm.bin \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/keychars/sec_key.kcm.bin:system/usr/keychars/sec_key.kcm.bin \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/keychars/surf_keypad.kcm.bin:system/usr/keychars/surf_keypad.kcm.bin
+	vendor/karbon/__DEVICE__/proprietary/lib/libloc_api-rpc-qc.so:/system/lib/libloc_api-rpc-qc.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libloc_ext.so:/system/lib/libloc_ext.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libloc_ext_v01.so:/system/lib/libloc_ext_v01.so
 
+# libmm: \\
 PRODUCT_COPY_FILES += \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/wifi/bcm4330_aps.bin:system/vendor/firmware/bcm4330_aps.bin \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/wifi/bcm4330_mfg.bin:system/vendor/firmware/bcm4330_mfg.bin \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/wifi/bcm4330_sta.bin:system/vendor/firmware/bcm4330_sta.bin
-
-# blobs necessary for audio
+	vendor/karbon/__DEVICE__/proprietary/lib/libmmipl.so:/system/lib/libmmipl.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libmmjpeg.so:/system/lib/libmmjpeg.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libjpeg.so:/system/lib/libjpeg.so
+# Camera: \\
 PRODUCT_COPY_FILES += \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/alsa_amixer:system/bin/alsa_amixer \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/alsa_aplay:system/bin/alsa_aplay \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/alsa_ctl:system/bin/alsa_ctl \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/alsa_ucm:system/bin/alsa_ucm \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libasound.so:system/lib/libasound.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libaudio.so:system/lib/libaudio.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libaudioeffect_jni.so:system/lib/libaudioeffect_jni.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libaudiohw_op.so:system/lib/libaudiohw_op.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libaudiohw_sf.so:system/lib/libaudiohw_sf.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libaudiopolicy.so:system/lib/libaudiopolicy.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/liblvvefs.so:system/lib/liblvvefs.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libmediayamaha.so:system/lib/libmediayamaha.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libmediayamaha_jni.so:system/lib/libmediayamaha_jni.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libmediayamahaservice.so:system/lib/libmediayamahaservice.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libmediayamaha_tuning_jni.so:system/lib/libmediayamaha_tuning_jni.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libkarbonAcousticeq.so:system/lib/libkarbonAcousticeq.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/lib_karbon_Acoustic_Module_Llite.so:system/lib/lib_karbon_Acoustic_Module_Llite.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/lib_karbon_Resampler.so:system/lib/lib_karbon_Resampler.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libkarbonSoundbooster.so:system/lib/libkarbonSoundbooster.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/lib_karbon_Sound_Booster.so:system/lib/lib_karbon_Sound_Booster.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libsoundalive.so:system/lib/libsoundalive.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libsoundpool.so:system/lib/libsoundpool.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libSR_AudioIn.so:system/lib/libSR_AudioIn.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/audio/libyamahasrc.so:system/lib/libyamahasrc.so
+	vendor/karbon/__DEVICE__/proprietary/lib/libcamera.so:/system/lib/libcamera.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libcamera_client.so:/system/lib/libcamera_client.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libcameraservice.so:/system/lib/libcameraservice.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/liboemcamera.so:/system/lib/liboemcamera.so
 
-# offmode charging    
+# Keychars: \\
 PRODUCT_COPY_FILES += \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/charging_mode:system/bin/charging_mode \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/playlpm:system/bin/playlpm \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/libQmageDecoder.so:system/lib/libQmageDecoder.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_batteryerror.qmg:system/media/battery_batteryerror.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_5.qmg:system/media/battery_charging_5.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_10.qmg:system/media/battery_charging_10.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_15.qmg:system/media/battery_charging_15.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_20.qmg:system/media/battery_charging_20.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_25.qmg:system/media/battery_charging_25.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_30.qmg:system/media/battery_charging_30.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_35.qmg:system/media/battery_charging_35.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_40.qmg:system/media/battery_charging_40.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_45.qmg:system/media/battery_charging_45.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_50.qmg:system/media/battery_charging_50.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_55.qmg:system/media/battery_charging_55.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_60.qmg:system/media/battery_charging_60.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_65.qmg:system/media/battery_charging_65.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_70.qmg:system/media/battery_charging_70.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_75.qmg:system/media/battery_charging_75.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_80.qmg:system/media/battery_charging_80.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_85.qmg:system/media/battery_charging_85.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_90.qmg:system/media/battery_charging_90.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_95.qmg:system/media/battery_charging_95.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_charging_100.qmg:system/media/battery_charging_100.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/battery_error.qmg:system/media/battery_error.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/chargingwarning.qmg:system/media/chargingwarning.qmg \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/offmode_charging/Disconnected.qmg:system/media/Disconnected.qmg
+	vendor/karbon/__DEVICE__/proprietary/usr/keychars/7x27a_kp.kcm.bin:/system/usr/keychars/7x27a_kp.kcm.bin \\
+	vendor/karbon/__DEVICE__/proprietary/usr/keychars/qwerty2.kcm.bin:/system/usr/keychars/qwerty2.kcm.bin \\
+	vendor/karbon/__DEVICE__/proprietary/usr/keychars/qwerty.kcm.bin:/system/usr/keychars/qwerty.kcm.bin \\
+	vendor/karbon/__DEVICE__/proprietary/usr/keychars/surf_keypad.kcm.bin:/system/usr/keychars/surf_keypad.kcm.bin
 
+# Keylayout: \\
+PRODUCT_COPY_FILES += \\
+	vendor/karbon/__DEVICE__/proprietary/usr/keylayout/surf_keypad.kl:/system/usr/keylayout/surf_keypad.kl \\
+	vendor/karbon/__DEVICE__/proprietary/usr/keylayout/AVRCP.kl:/system/usr/keylayout/AVRCP.kl \\
+	vendor/karbon/__DEVICE__/proprietary/usr/keylayout/7x27a_kp.kl:/system/usr/keylayout/7x27a_kp.kl \\
+	vendor/karbon/__DEVICE__/proprietary/usr/keylayout/qwerty.kl:/system/usr/keylayout/qwerty.kl \\
+	vendor/karbon/__DEVICE__/proprietary/usr/keylayout/7k_handset.kl:/system/usr/keylayout/7k_handset.kl
+
+# omx: \\
+PRODUCT_COPY_FILES += \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libmm-adspsvc.so:/system/lib/libmm-adspsvc.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxAacDec.so:/system/lib/libOmxAacDec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxAacEnc.so:/system/lib/libOmxAacEnc.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxAdpcmDec.so:/system/lib/libOmxAdpcmDec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxAmrDec.so:/system/lib/libOmxAmrDec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxAmrEnc.so:/system/lib/libOmxAmrEnc.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxAmrRtpDec.so:/system/lib/libOmxAmrRtpDec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxAmrwbDec.so:/system/lib/libOmxAmrwbDec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxAmrwbDec.so:/system/lib/libOmxAmrwbDec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxEvrcDec.so:/system/lib/libOmxEvrcDec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxEvrcEnc.so:/system/lib/libOmxEvrcEnc.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxEvrcHwDec.so:/system/lib/libOmxEvrcHwDec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxH264Dec.so:/system/lib/libOmxH264Dec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxMp3Dec.so:/system/lib/libOmxMp3Dec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxMpeg4Dec.so:/system/lib/libOmxMpeg4Dec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxOn2Dec.so:/system/lib/libOmxOn2Dec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxQcelp13Dec.so:/system/lib/libOmxQcelp13Dec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxQcelp13Enc.so:/system/lib/libOmxQcelp13Enc.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxQcelpHwDec.so:/system/lib/libOmxQcelpHwDec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxVidEnc.so:/system/lib/libOmxVidEnc.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxVp8Dec.so:/system/lib/libOmxVp8Dec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxWmaDec.so:/system/lib/libOmxWmaDec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxWmvDec.so:/system/lib/libOmxWmvDec.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libOmxrv9Dec.so:/system/lib/libOmxrv9Dec.so
+
+# Pull Opencore libs: \\
+PRODUCT_COPY_FILES += \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libopencorehw.so:/system/lib/libopencorehw.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libopencore_author.so:/system/lib/libopencore_author.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libopencore_common.so:/system/lib/libopencore_common.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libopencore_downloadreg.so:/system/lib/libopencore_downloadreg.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libopencore_download.so:/system/lib/libopencore_download.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libopencore_mp4localreg.so:/system/lib/libopencore_mp4localreg.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libopencore_mp4local.so:/system/lib/libopencore_mp4local.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libopencore_net_support.so:/system/lib/libopencore_net_support.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libopencore_player.so:/system/lib/libopencore_player.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libopencore_rtspreg.so:/system/lib/libopencore_rtspreg.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libopencore_rtsp.so:/system/lib/libopencore_rtsp.so
+
+# Shared libs: \\
+PRODUCT_COPY_FILES += \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libomx_amrenc_sharedlibrary.so:/system/lib/libomx_amrenc_sharedlibrary.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libomx_amrdec_sharedlibrary.so:/system/lib/libomx_amrdec_sharedlibrary.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libomx_avcdec_sharedlibrary.so:/system/lib/libomx_avcdec_sharedlibrary.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libomx_mp3dec_sharedlibrary.so:/system/lib/libomx_mp3dec_sharedlibrary.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libomx_m4vdec_sharedlibrary.so:/system/lib/libomx_m4vdec_sharedlibrary.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libomx_sharedlibrary.so:/system/lib/libomx_sharedlibrary.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libomx_aacdec_sharedlibrary.so:/system/lib/libomx_aacdec_sharedlibrary.so
+
+# Stagefright: \\
+PRODUCT_COPY_FILES += \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libstagefright_enc_common.so:/system/lib/libstagefright_enc_common.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libstagefright_avc_common.so:/system/lib/libstagefright_avc_common.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libstagefright_color_conversion.so:/system/lib/libstagefright_color_conversion.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libstagefrighthw.so:/system/lib/libstagefrighthw.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libstagefright.so:/system/lib/libstagefright.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libstagefright_amrnb_common.so:/system/lib/libstagefright_amrnb_common.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libstagefright_omx.so:/system/lib/libstagefright_omx.so \\
+	vendor/karbon/__DEVICE__/proprietary/lib/libstagefright_foundation.so:/system/lib/libstagefright_foundation.so
 EOF
 
 ./setup-makefiles.sh
